@@ -25,6 +25,20 @@ app.get('/products',cors(), function(req, res) {
         }
       });
   });
+  app.get('/products/:category', function(req, res) {
+    console.log('getting all books');
+    Boook.find({
+      _category: req.params.category
+      })
+      .exec(function(err, book) {
+        if(err) {
+          res.send('error occured')
+        } else {
+          console.log(book);
+          res.json(book);
+        }
+      });
+  });
   
   app.listen(port, function() {
     console.log('app listening on port ' + port);
